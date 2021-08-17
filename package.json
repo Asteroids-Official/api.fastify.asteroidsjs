@@ -4,6 +4,13 @@
   "main": "index.js",
   "license": "MIT",
   "author": "Caique Torres",
+  "keywords": [
+    "web",
+    "asteroids",
+    "socket-io",
+    "javascript",
+    "liquid-galaxy"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "tsc && node dist/main.js",
