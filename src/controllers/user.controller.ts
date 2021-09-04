@@ -10,7 +10,11 @@ export class UserController {
     @inject(TYPE.userService) private readonly userService: UserService,
   ) {}
 
-  public getOne(): string {
-    return this.userService.getOne()
+  public getOne(id: string) {
+    return this.userService.getOne(id)
+  }
+
+  public create(payload: any): string {
+    return this.userService.create(payload);
   }
 }
