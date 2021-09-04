@@ -19,7 +19,7 @@ container.bind(TYPE.fastify).toConstantValue(fastify())
 container.bind(TYPE.connection).toProvider<typeof mongoose>(() => {
   return (async () => {
     try {
-      return await mongoose.connect('mongodb+srv://admin:admin@cluster0.qgfmv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+      return await mongoose.connect(process.env.MONGO_URL);
     }catch(err) {
       console.error(err);
     }
