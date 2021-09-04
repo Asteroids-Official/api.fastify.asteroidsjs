@@ -4,7 +4,7 @@ import { TYPE, IFastify } from './types/types'
 
 import { UserController } from './controllers/user.controller'
 
-import 'reflect-metadata'
+import { getIdFromRequest } from './utils/requet';
 
 @injectable()
 export class Routes {
@@ -17,8 +17,12 @@ export class Routes {
   }
 
   private setupUserRoutes(): void {
-    this.fastify.get('/users', async () => {
-      return this.userController.getOne()
-    })
+    this.fastify.get('/users/:id', async (request) => {
+      return this.userController.getOne(getIdFromRequest(request));
+    });
+
+    this.fastify.post('/users', async(request) => {
+      return this.userController.create(request.body);
+    });
   }
 }
