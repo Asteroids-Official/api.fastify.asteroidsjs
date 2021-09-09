@@ -4,6 +4,11 @@ import { User } from '../schemas/user.schema';
 
 @injectable()
 export class UserService {
+
+  public getAll() {
+    return User.find();
+  }
+
   public getOne(id:string) {
     return User.findById(id);
   }

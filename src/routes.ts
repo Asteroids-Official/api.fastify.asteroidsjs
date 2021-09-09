@@ -17,6 +17,10 @@ export class Routes {
   }
 
   private setupUserRoutes(): void {
+    this.fastify.get('/users', async (request) => {
+      return this.userController.getALl();
+    });
+
     this.fastify.get('/users/:id', async (request) => {
       return this.userController.getOne(getIdFromRequest(request));
     });
