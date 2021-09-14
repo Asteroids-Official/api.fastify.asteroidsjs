@@ -28,5 +28,11 @@ export class Routes {
     this.fastify.post('/users', async(request) => {
       return this.userController.create(request.body);
     });
+
+    this.fastify.post('/register', async(request) => {
+     //TODO: hash and salt
+
+      return this.userController.create(request.body);
+    });
   }
 }
