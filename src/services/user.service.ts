@@ -16,6 +16,6 @@ export class UserService {
   public create(payload: any): any{
     const user = new User(payload);
     user.save();
-    return '200 - OK';
+    return user;
   }
 }
