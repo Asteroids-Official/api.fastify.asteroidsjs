@@ -21,4 +21,8 @@ export class UserController {
   public create(payload: any): string {
     return this.userService.create(payload);
   }
+
+  public delete(id: string) {
+    return this.userService.delete(id)
+  }
 }
