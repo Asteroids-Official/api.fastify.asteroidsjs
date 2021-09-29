@@ -22,6 +22,7 @@
     "ci": "rm -rf node_modules && yarn"
   },
   "dependencies": {
+    "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "crypto-js": "^4.1.1",
     "dotenv": "^10.0.0",
