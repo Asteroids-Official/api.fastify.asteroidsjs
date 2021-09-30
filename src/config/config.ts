@@ -12,7 +12,7 @@ import { ValidationService } from '../entities/validation/services/validation.se
 import { UserController } from '../entities/user/controllers/user.controller'
 
 import { App } from '../app'
-import { Routes } from '../routes'
+import { RoutesService } from '../routes'
 
 export const container = new Container()
 
@@ -22,7 +22,7 @@ setupUser()
 
 function setupApp() {
   container.bind(TYPE.app).to(App).inSingletonScope()
-  container.bind(TYPE.routes).to(Routes).inSingletonScope()
+  container.bind(TYPE.routes).to(RoutesService).inSingletonScope()
   container.bind(TYPE.fastify).toConstantValue(fastify())
   container.bind(TYPE.mongoService).to(MongoService).inSingletonScope()
 }

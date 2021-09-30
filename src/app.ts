@@ -5,13 +5,16 @@ import { IFastify, TYPE } from './types/types'
 import { ConfigService } from './entities/config/services/config.service'
 import { MongoService } from './entities/mongo/services/mongo.service'
 
-import { Routes } from './routes'
+import { RoutesService } from './routes'
 
+/**
+ * The application main class.
+ */
 @injectable()
 export class App {
   constructor(
     @inject(TYPE.routes)
-    _routes: Routes,
+    _routes: RoutesService,
     @inject(TYPE.configService)
     _configService: ConfigService,
     @inject(TYPE.mongoService)
@@ -24,6 +27,11 @@ export class App {
     })
   }
 
+  /**
+   * Method that starts the application.
+   *
+   * @param port defines the port where the application will be executed.
+   */
   listen(port: number | string): void {
     this.fastify.listen(port, () => {
       console.log('app started')

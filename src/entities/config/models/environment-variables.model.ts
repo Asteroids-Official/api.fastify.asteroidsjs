@@ -1,4 +1,10 @@
-import { IsDefined, IsIn, IsString } from 'class-validator'
+import {
+  IsDefined,
+  IsIn,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator'
 
 export class EnvironmentVariables {
   @IsString()
@@ -7,6 +13,10 @@ export class EnvironmentVariables {
   })
   @IsIn(['production', 'development', 'test'])
   NODE_ENV: 'production' | 'development' | 'test'
+
+  @IsOptional()
+  @IsNumber({}, { message: 'It is required to set the PORT' })
+  PORT?: number
 
   //#region
 

@@ -6,6 +6,9 @@ import { ConfigService } from '../../config/services/config.service'
 
 import * as mongoose from 'mongoose'
 
+/**
+ * Service that deals with all the business logic related with the MongoDB
+ */
 @injectable()
 export class MongoService {
   constructor(
@@ -14,6 +17,9 @@ export class MongoService {
     this.init()
   }
 
+  /**
+   * Method that initializes the mongoose connection.
+   */
   private async init() {
     try {
       await mongoose.connect(this.configService.get('MONGO_URL'))
