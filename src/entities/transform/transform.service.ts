@@ -12,7 +12,7 @@ import { plainToClass } from 'class-transformer'
 @injectable()
 export class TransformService {
   /**
-   * Method that transforms some object based on the informed type.
+   * Method that transforms some object based on the paramater `type`.
    *
    * @param type defines the tested type.
    * @param value defines an object that represent the object that will be

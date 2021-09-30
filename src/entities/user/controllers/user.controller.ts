@@ -11,6 +11,10 @@ import { UserService } from '../services/user.service'
 
 import { getIdFromRequest } from '../../../utils/request'
 
+/**
+ * Controller that deals with all the routes related with the `user`
+ * entities.
+ */
 @injectable()
 export class UserController {
   constructor(
@@ -24,35 +28,28 @@ export class UserController {
     private readonly userService: UserService,
   ) {}
 
+  /**
+   * Method that setups all the entity related routes.
+   */
   mapRoutes(): void {
     // createOne
     this.fastify.post('/users', async (request, response) => {
-      try {
-        const payload = this.validationService.validate(
-          CreateUserDto,
-          request.body,
-        )
-        const user = await this.userService.createOne(payload)
-        const proxy = this.transformService.transform(UserDto, user)
+      const payload = this.validationService.validateHttp(
+        CreateUserDto,
+        request.body,
+      )
+      const user = await this.userService.createOne(payload)
+      const proxy = this.transformService.transform(UserDto, user)
 
-        response.send(proxy)
-      } catch (error) {
-        console.error(error)
-        response.status(error.statusCode).send(error)
-      }
+      response.send(proxy)
     })
 
     // getOneById
     this.fastify.get('/users/:id', async (request, response) => {
-      try {
-        const user = await this.userService.getOneById(
-          getIdFromRequest(request),
-        )
-        response.send(this.transformService.transform(UserDto, user))
-      } catch (error) {
-        console.error(error)
-        response.status(error.statusCode).send(error)
-      }
+      const user = await this.userService.getOneById(getIdFromRequest(request))
+
+      const proxy = this.transformService.transform(UserDto, user)
+      response.send(proxy)
     })
   }
 }

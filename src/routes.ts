@@ -4,9 +4,15 @@ import { TYPE } from './types/types'
 
 import { UserController } from './entities/user/controllers/user.controller'
 
+/**
+ * Service that deals with all the application routes.
+ */
 @injectable()
-export class Routes {
-  constructor(@inject(TYPE.userController) userController: UserController) {
+export class RoutesService {
+  constructor(
+    @inject(TYPE.userController)
+    userController: UserController,
+  ) {
     userController.mapRoutes()
   }
 }
