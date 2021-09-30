@@ -1,3 +1,5 @@
+import 'reflect-metadata'
+
 import { TYPE } from './types/types'
 
 import { App } from './app'
