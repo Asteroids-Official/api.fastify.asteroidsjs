@@ -1,32 +1,20 @@
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
+
+import { TYPE } from '../../../types/types'
 
 import { EnvironmentVariables } from '../models/environment-variables.model'
 
-import { plainToClass } from 'class-transformer'
-import { validateSync } from 'class-validator'
+import { ValidationService } from '../../validation/services/validation.service'
 
 @injectable()
 export class ConfigService {
-  constructor() {
-    this.validate(process.env)
+  constructor(
+    @inject(TYPE.validationService) validationService: ValidationService,
+  ) {
+    validationService.validate(process.env, EnvironmentVariables)
   }
 
   get<K extends keyof EnvironmentVariables>(key: K): EnvironmentVariables[K] {
     return process.env[key] as EnvironmentVariables[K]
-  }
-
-  private validate(config: Record<string, unknown>): EnvironmentVariables {
-    const validatedConfig = plainToClass(EnvironmentVariables, config, {
-      enableImplicitConversion: true,
-    })
-    const errors = validateSync(validatedConfig, {
-      skipMissingProperties: false,
-    })
-
-    if (errors.length > 0) {
-      console.error(errors.toString())
-      throw new Error(errors.toString())
-    }
-    return validatedConfig
   }
 }
