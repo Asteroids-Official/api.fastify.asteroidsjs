@@ -8,6 +8,8 @@ export const TYPE = {
   userController: Symbol('__user_controller__'),
   userService: Symbol('__user_service__'),
   mongoService: Symbol('__mongo_service__'),
+  transformService: Symbol('__transform_service__'),
+  validationService: Symbol('__validation_service__'),
 }
 
 export type IFastify = ReturnType<typeof fastify>
