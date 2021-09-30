@@ -6,7 +6,10 @@ import { UserController } from './entities/user/controllers/user.controller'
 
 @injectable()
 export class Routes {
-  constructor(@inject(TYPE.userController) userController: UserController) {
+  constructor(
+    @inject(TYPE.userController)
+    userController: UserController,
+  ) {
     userController.mapRoutes()
   }
 }

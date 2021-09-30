@@ -11,7 +11,7 @@ export class ConfigService {
   constructor(
     @inject(TYPE.validationService) validationService: ValidationService,
   ) {
-    validationService.validate(process.env, EnvironmentVariables)
+    validationService.validate(EnvironmentVariables, process.env)
   }
 
   get<K extends keyof EnvironmentVariables>(key: K): EnvironmentVariables[K] {

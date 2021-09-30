@@ -10,11 +10,19 @@ import { Routes } from './routes'
 @injectable()
 export class App {
   constructor(
-    @inject(TYPE.routes) _routes: Routes,
-    @inject(TYPE.configService) _configService: ConfigService,
-    @inject(TYPE.mongoService) _mongoService: MongoService,
-    @inject(TYPE.fastify) private readonly fastify: IFastify,
-  ) {}
+    @inject(TYPE.routes)
+    _routes: Routes,
+    @inject(TYPE.configService)
+    _configService: ConfigService,
+    @inject(TYPE.mongoService)
+    _mongoService: MongoService,
+    @inject(TYPE.fastify)
+    private readonly fastify: IFastify,
+  ) {
+    fastify.setErrorHandler((error, _, reply) => {
+      reply.status(error.statusCode ?? 500).send(error)
+    })
+  }
 
   listen(port: number | string): void {
     this.fastify.listen(port, () => {
