@@ -10,6 +10,8 @@ export const TYPE = {
   transformService: Symbol('__transform_service__'),
   validationService: Symbol('__validation_service__'),
   userController: Symbol('__user_controller__'),
+  spaceShipColorController: Symbol('__space_ship_color_controller__'),
+  spaceShipColorService: Symbol('__space_ship_color_service__'),
 }
 
 export type IFastify = ReturnType<typeof fastify>
