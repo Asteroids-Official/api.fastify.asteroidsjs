@@ -2,6 +2,7 @@ import { inject, injectable } from 'inversify'
 
 import { TYPE } from '../../../types/types'
 
+import { ConflictException } from '../../../exceptions/conflict.exception'
 import { NotFoundException } from '../../../exceptions/not-found.exception'
 
 import { CreateUserDto } from '../dtos/create-user.dto'
@@ -29,7 +30,12 @@ export class UserService implements IService<UserDto> {
    * @returns an object that represents the created user.
    */
   async createOne(payload: CreateUserDto): Promise<UserDto> {
-    const password = this.passwordService.encrypt(payload.password)
+    const password = await this.passwordService.encrypt(payload.password)
+
+    const exists = await this.hasWithEmail(payload.email)
+    if (exists) {
+      throw new ConflictException('An user with this email already exists')
+    }
 
     const user = new UserModel({
       ...payload,
@@ -70,9 +76,7 @@ export class UserService implements IService<UserDto> {
    * @returns an object that represents the found entity.
    */
   async getOneByEmail(email: string): Promise<UserDto> {
-    const exists = await UserModel.exists({
-      email,
-    })
+    const exists = await this.hasWithEmail(email)
 
     if (!exists) {
       throw new NotFoundException(
@@ -80,7 +84,19 @@ export class UserService implements IService<UserDto> {
       )
     }
 
-    const user = UserModel.find({ email })
+    const user = await UserModel.findOne({ email })
     return user.toObject()
+  }
+
+  /**
+   * Method that validates if some email already exists.
+   *
+   * @param email defines the email
+   * @returns
+   */
+  private async hasWithEmail(email: string): Promise<boolean> {
+    return UserModel.exists({
+      email,
+    })
   }
 }

@@ -1,4 +1,4 @@
-import { fastifyJWT } from 'fastify-jwt'
+import jwtFastify from 'fastify-jwt'
 import { inject, injectable } from 'inversify'
 
 import { IFastify, TYPE } from '../../types/types'
@@ -24,7 +24,7 @@ export class AuthService {
     @inject(TYPE.userService)
     private readonly userService: UserService,
   ) {
-    this.fastify.register(fastifyJWT, {
+    this.fastify.register(jwtFastify, {
       secret: this.configService.get('JWT_SECRET'),
     })
   }
