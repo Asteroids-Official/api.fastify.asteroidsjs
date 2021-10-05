@@ -2,7 +2,7 @@ import { inject, injectable } from 'inversify'
 
 import { TYPE } from '../../../types/types'
 
-import { EnvironmentVariables } from '../models/environment-variables.model'
+import { EnvVariables } from '../models/env-variables.model'
 
 import { ValidationService } from '../../validation/services/validation.service'
 
@@ -17,7 +17,7 @@ export class ConfigService {
     @inject(TYPE.validationService) validationService: ValidationService,
   ) {
     config()
-    validationService.validate(EnvironmentVariables, process.env)
+    validationService.validate(EnvVariables, process.env)
   }
 
   /**
@@ -27,7 +27,7 @@ export class ConfigService {
    * key.
    * @returns the found value.
    */
-  get<K extends keyof EnvironmentVariables>(key: K): EnvironmentVariables[K] {
-    return process.env[key] as EnvironmentVariables[K]
+  get<K extends keyof EnvVariables>(key: K): EnvVariables[K] {
+    return process.env[key] as EnvVariables[K]
   }
 }

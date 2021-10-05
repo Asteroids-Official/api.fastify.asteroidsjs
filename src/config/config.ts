@@ -3,12 +3,15 @@ import { Container } from 'inversify'
 
 import { TYPE } from '../types/types'
 
+import { AuthService } from '../entities/auth/auth.service'
 import { ConfigService } from '../entities/config/services/config.service'
 import { MongoService } from '../entities/mongo/services/mongo.service'
+import { PasswordService } from '../entities/password/password.service'
 import { TransformService } from '../entities/transform/transform.service'
 import { UserService } from '../entities/user/services/user.service'
 import { ValidationService } from '../entities/validation/services/validation.service'
 
+import { AuthController } from '../entities/auth/auth.controller'
 import { UserController } from '../entities/user/controllers/user.controller'
 
 import { App } from '../app'
@@ -18,6 +21,7 @@ export const container = new Container()
 
 setupApp()
 setupConfig()
+setupAuth()
 setupUser()
 
 function setupApp() {
@@ -34,6 +38,12 @@ function setupConfig() {
     .to(ValidationService)
     .inSingletonScope()
   container.bind(TYPE.configService).to(ConfigService).inSingletonScope()
+  container.bind(TYPE.passwordService).to(PasswordService).inSingletonScope()
+}
+
+function setupAuth() {
+  container.bind(TYPE.authService).to(AuthService).inSingletonScope()
+  container.bind(TYPE.authController).to(AuthController).inSingletonScope()
 }
 
 function setupUser() {
