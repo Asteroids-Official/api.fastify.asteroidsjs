@@ -33,23 +33,23 @@ export class UserController {
    */
   mapRoutes(): void {
     // createOne
-    this.fastify.post('/users', async (request, response) => {
+    this.fastify.post('/users', async (req, res) => {
       const payload = this.validationService.validateHttp(
         CreateUserDto,
-        request.body,
+        req.body,
       )
       const user = await this.userService.createOne(payload)
       const proxy = this.transformService.transform(UserDto, user)
 
-      response.send(proxy)
+      res.send(proxy)
     })
 
     // getOneById
-    this.fastify.get('/users/:id', async (request, response) => {
-      const user = await this.userService.getOneById(getIdFromRequest(request))
+    this.fastify.get('/users/:id', async (req, res) => {
+      const user = await this.userService.getOneById(getIdFromRequest(req))
 
       const proxy = this.transformService.transform(UserDto, user)
-      response.send(proxy)
+      res.send(proxy)
     })
   }
 }

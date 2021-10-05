@@ -9,7 +9,10 @@ export const TYPE = {
   mongoService: Symbol('__mongo_service__'),
   transformService: Symbol('__transform_service__'),
   validationService: Symbol('__validation_service__'),
+  passwordService: Symbol('__password_service__'),
+  authService: Symbol('__auth_service__'),
   userController: Symbol('__user_controller__'),
+  authController: Symbol('__auth_controller__'),
 }
 
 export type IFastify = ReturnType<typeof fastify>

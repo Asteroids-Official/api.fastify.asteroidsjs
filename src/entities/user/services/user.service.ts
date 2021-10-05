@@ -1,4 +1,6 @@
-import { injectable } from 'inversify'
+import { inject, injectable } from 'inversify'
+
+import { TYPE } from '../../../types/types'
 
 import { NotFoundException } from '../../../exceptions/not-found.exception'
 
@@ -7,6 +9,7 @@ import { UserDto } from '../dtos/user.dto'
 import { UserModel } from '../models/user.model'
 
 import { IService } from '../../../shared/service.interface'
+import { PasswordService } from '../../password/password.service'
 
 /**
  * Service that deals with all the business logic related with the `user`
@@ -14,6 +17,11 @@ import { IService } from '../../../shared/service.interface'
  */
 @injectable()
 export class UserService implements IService<UserDto> {
+  constructor(
+    @inject(TYPE.passwordService)
+    private readonly passwordService: PasswordService,
+  ) {}
+
   /**
    * Method that creates a new entity.
    *
@@ -21,8 +29,11 @@ export class UserService implements IService<UserDto> {
    * @returns an object that represents the created user.
    */
   async createOne(payload: CreateUserDto): Promise<UserDto> {
+    const password = this.passwordService.encrypt(payload.password)
+
     const user = new UserModel({
       ...payload,
+      password,
       role: 'common',
     })
 
@@ -48,6 +59,28 @@ export class UserService implements IService<UserDto> {
     }
 
     const user = UserModel.findById(id)
+    return user.toObject()
+  }
+
+  /**
+   * Method that gets one entity based on the `email`
+   * parameter.
+   *
+   * @param email defines the entity unique email.
+   * @returns an object that represents the found entity.
+   */
+  async getOneByEmail(email: string): Promise<UserDto> {
+    const exists = await UserModel.exists({
+      email,
+    })
+
+    if (!exists) {
+      throw new NotFoundException(
+        `The entity identified by '${email}' of type 'User' does not exist or is disabled`,
+      )
+    }
+
+    const user = UserModel.find({ email })
     return user.toObject()
   }
 }
