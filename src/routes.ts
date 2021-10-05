@@ -2,6 +2,7 @@ import { injectable, inject } from 'inversify'
 
 import { TYPE } from './types/types'
 
+import { AuthController } from './entities/auth/auth.controller'
 import { UserController } from './entities/user/controllers/user.controller'
 
 /**
@@ -12,7 +13,10 @@ export class RoutesService {
   constructor(
     @inject(TYPE.userController)
     userController: UserController,
+    @inject(TYPE.authController)
+    authController: AuthController,
   ) {
     userController.mapRoutes()
+    authController.mapRoutes()
   }
 }
