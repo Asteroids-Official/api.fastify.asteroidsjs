@@ -1,12 +1,8 @@
 import { BaseDto } from '../../../shared/base.dto'
 
-import { IsDefined, IsNumber, IsString } from 'class-validator'
+import { IsDefined, IsNumber } from 'class-validator'
 
 export class ColliderDto extends BaseDto {
-  @IsDefined({ message: 'It is required to send the id' })
-  @IsString({ message: 'It is required to send a valid string' })
-  _id: string
-
   @IsDefined({ message: 'It is required to send the type' })
   @IsNumber()
   type: number
