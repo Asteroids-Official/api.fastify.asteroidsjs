@@ -5,10 +5,6 @@ import { SpaceshipColorDto } from "../../spaceship-color/dtos/spaceship-color.dt
 import { IsDefined, IsArray, IsString, IsOptional } from 'class-validator'
 
 export class SpaceshipDto extends BaseDto {
-  @IsDefined({ message: 'It is required to send the id' })
-  @IsString({ message: 'It is required to send a valid string' })
-  _id: string
-
   @IsDefined({ message: 'It is required to send the name' })
   @IsString({ message: 'It is required to send a valid string' })
   name: string
