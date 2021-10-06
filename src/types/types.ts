@@ -13,6 +13,8 @@ export const TYPE = {
   authService: Symbol('__auth_service__'),
   firebaseService: Symbol('__firebase_service__'),
   userController: Symbol('__user_controller__'),
+  spaceShipColorController: Symbol('__space_ship_color_controller__'),
+  spaceShipColorService: Symbol('__space_ship_color_service__'),
   authController: Symbol('__auth_controller__'),
   uploadService: Symbol('__upload_service__'),
   uploadController: Symbol('__upload_controller__'),
