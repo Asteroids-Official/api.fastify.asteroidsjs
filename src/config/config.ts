@@ -5,13 +5,16 @@ import { TYPE } from '../types/types'
 
 import { AuthService } from '../entities/auth/auth.service'
 import { ConfigService } from '../entities/config/services/config.service'
+import { FirebaseService } from '../entities/firebase/firebase.service'
 import { MongoService } from '../entities/mongo/services/mongo.service'
 import { PasswordService } from '../entities/password/password.service'
 import { TransformService } from '../entities/transform/transform.service'
+import { UploadService } from '../entities/upload/upload.service'
 import { UserService } from '../entities/user/services/user.service'
 import { ValidationService } from '../entities/validation/services/validation.service'
 
 import { AuthController } from '../entities/auth/auth.controller'
+import { UploadController } from '../entities/upload/upload.controller'
 import { UserController } from '../entities/user/controllers/user.controller'
 
 import { App } from '../app'
@@ -23,6 +26,7 @@ setupApp()
 setupConfig()
 setupAuth()
 setupUser()
+setupUpload()
 
 function setupApp() {
   container.bind(TYPE.app).to(App).inSingletonScope()
@@ -49,4 +53,10 @@ function setupAuth() {
 function setupUser() {
   container.bind(TYPE.userService).to(UserService).inSingletonScope()
   container.bind(TYPE.userController).to(UserController).inSingletonScope()
+}
+
+function setupUpload() {
+  container.bind(TYPE.firebaseService).to(FirebaseService).inSingletonScope()
+  container.bind(TYPE.uploadService).to(UploadService).inSingletonScope()
+  container.bind(TYPE.uploadController).to(UploadController).inSingletonScope()
 }
