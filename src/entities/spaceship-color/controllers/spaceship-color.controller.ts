@@ -2,14 +2,15 @@ import { inject, injectable } from 'inversify'
 
 import { TYPE, IFastify } from '../../../types/types'
 
-import { TransformService } from '../../transform/transform.service'
-import { ValidationService } from '../../validation/services/validation.service'
-
-import { getIdFromRequest } from '../../../utils/request'
-import { SpaceShipColorService } from '../services/spaceship-color.service'
 import { CreateSpaceshipColorDto } from '../dtos/create-spaceship-color.dto'
 import { SpaceshipColorDto } from '../dtos/spaceship-color.dto'
 import { UpdateSpaceshipColorDto } from '../dtos/update-spaceship-color.dto'
+
+import { TransformService } from '../../transform/transform.service'
+import { ValidationService } from '../../validation/services/validation.service'
+import { SpaceShipColorService } from '../services/spaceship-color.service'
+
+import { getIdFromRequest } from '../../../utils/request'
 
 /**
  * Controller that deals with all the routes related with the `spaceShipcolor`
@@ -97,14 +98,3 @@ export class SpaceShipColorController {
     })
   }
 }
-
-/**
- *
-  X - createOne     (POST /spaceships)
-  X - getOne        (GET /spaceships/:id)
-  X - getAll        (GET /spaceships)
-  X - updateOne     (PATCH /spaceships/:id)
-  X - deleteOne     (DELETE /spaceships/:id)
-  X - disableOne    (PATCH /spaceships:/id)
-  X - enableOne     (PATCH /spaceships:/id)
- */

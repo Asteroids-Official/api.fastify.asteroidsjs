@@ -15,6 +15,8 @@ export const TYPE = {
   spaceShipColorController: Symbol('__space_ship_color_controller__'),
   spaceShipColorService: Symbol('__space_ship_color_service__'),
   authController: Symbol('__auth_controller__'),
+  spaceshipController: Symbol('__spaceship_controller__'),
+  spaceshipService: Symbol('__spaceship_service__'),
 }
 
 export type IFastify = ReturnType<typeof fastify>
