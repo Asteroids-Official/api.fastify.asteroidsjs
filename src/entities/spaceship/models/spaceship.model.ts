@@ -7,7 +7,9 @@ import { Schema, model } from "mongoose";
 const spaceshipSchema = new Schema<SpaceshipDto>({
   name: { type: String, required: true },
   colliders: [ColliderDto],
-  spaceshipColors: [SpaceshipColorDto]
+  spaceshipColors: [SpaceshipColorDto],
+  isActive: { type: Boolean, require: false, default: true},
+  isDefault: { type: Boolean, require: false, default: false},
 })
 
 export const SpaceshipModel = model('Spaceship', spaceshipSchema)
