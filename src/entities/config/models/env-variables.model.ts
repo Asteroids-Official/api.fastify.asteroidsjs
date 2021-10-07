@@ -7,8 +7,8 @@ import {
 } from 'class-validator'
 
 export class EnvVariables {
-  @IsString()
   @IsDefined({ message: 'It is required to set the NODE_ENV' })
+  @IsString({ message: 'It is required to set a valid string' })
   @IsIn(['production', 'development', 'test'])
   NODE_ENV: 'production' | 'development' | 'test'
 
@@ -18,17 +18,37 @@ export class EnvVariables {
 
   //#region
 
-  @IsString()
-  @IsDefined({ message: 'It is required to set the the MONGO_URL' })
+  @IsDefined({ message: 'It is required to set the MONGO_URL' })
+  @IsString({ message: 'It is required to set a valid string' })
   MONGO_URL: string
 
   //#endregion
 
   //#region JWT
 
-  @IsString()
-  @IsDefined({ message: 'It is required to set the the JWT_SECRET' })
+  @IsDefined({ message: 'It is required to set the JWT_SECRET' })
+  @IsString({ message: 'It is required to set a valid string' })
   JWT_SECRET: string
+
+  //#endregion
+
+  //#region Firebase
+
+  @IsDefined({ message: 'It is required to set the firebase client email' })
+  @IsString({ message: 'It is required to set a valid string' })
+  FB_CLIENT_EMAIL: string
+
+  @IsDefined({ message: 'It is required to set the firebase private key' })
+  @IsString({ message: 'It is required to set a valid string' })
+  FB_PRIVATE_KEY: string
+
+  @IsDefined({ message: 'It is required to set the firebase project id' })
+  @IsString({ message: 'It is required to set a valid string' })
+  FB_PROJECT_ID: string
+
+  @IsDefined({ message: 'It is required to set the firebase storage bucket' })
+  @IsString({ message: 'It is required to set a valid string' })
+  FB_STORAGE_BUCKET: string
 
   //#endregion
 }
