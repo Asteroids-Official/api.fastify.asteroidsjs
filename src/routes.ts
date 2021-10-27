@@ -1,10 +1,10 @@
 import { injectable, inject } from 'inversify'
 
-import { TYPE } from './types/types'
+import { TYPE } from './common/types/types'
 
-import { AuthController } from './entities/auth/auth.controller'
-import { UploadController } from './entities/upload/upload.controller'
-import { UserController } from './entities/user/controllers/user.controller'
+import { AuthController } from './auth/auth.controller'
+import { UploadController } from './upload/upload.controller'
+import { UserController } from './user/user.controller'
 
 /**
  * Service that deals with all the application routes.

@@ -1,9 +1,9 @@
 import { inject, injectable } from 'inversify'
 
-import { IFastify, TYPE } from './types/types'
+import { IFastify, TYPE } from './common/types/types'
 
-import { ConfigService } from './entities/config/services/config.service'
-import { MongoService } from './entities/mongo/services/mongo.service'
+import { ConfigService } from './config/config.service'
+import { MongoService } from './mongo/mongo.service'
 
 import { RoutesService } from './routes'
 
