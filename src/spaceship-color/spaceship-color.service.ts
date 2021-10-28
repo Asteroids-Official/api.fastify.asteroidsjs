@@ -63,6 +63,11 @@ export class SpaceShipColorService implements IService<SpaceshipColorDto> {
     return spaceshipColors.map(item => { item.toObject()})
   }
 
+   /**
+   * Method that delete one from entities.
+   *
+   * @param id represents the entity id.
+   */
   async deleteOne(id: number | string): Promise<void> {
     const exists = await SpaceshipColorModel.exists({
       _id: `${id}`,
@@ -77,6 +82,13 @@ export class SpaceShipColorService implements IService<SpaceshipColorDto> {
     SpaceshipColorModel.deleteOne({ _id: `${id}`})
   }
 
+  /**
+   * Method that update a entity.
+   *
+   * @param id represents the entity id.
+   * @param payload defines an object that represents the new data for the entity.
+   * @returns an object that represents the updated SpaceshipColor.
+   */
   async updateOne(id: number | string, payload: UpdateSpaceshipColorDto ): Promise<SpaceshipColorDto> {
     const exists = await SpaceshipColorModel.exists({
       _id: `${id}`,
@@ -92,6 +104,12 @@ export class SpaceShipColorService implements IService<SpaceshipColorDto> {
     return spaceshipColor
   }
 
+   /**
+   * Method that disable a entity.
+   *
+   * @param id represents the entity id.
+   * @returns an object that represents the disabled SpaceshipColor.
+   */
   async disableOne(id: number | string): Promise<SpaceshipColorDto> {
     const exists = await SpaceshipColorModel.exists({
       _id: `${id}`,
@@ -107,6 +125,12 @@ export class SpaceShipColorService implements IService<SpaceshipColorDto> {
     return spaceshipColor
   }
 
+   /**
+   * Method that enable a entity.
+   *
+   * @param id represents the entity id.
+   * @returns an object that represents the enabled SpaceshipColor.
+   */
   async enableOne(id: number | string): Promise<SpaceshipColorDto> {
     const exists = await SpaceshipColorModel.exists({
       _id: `${id}`,
