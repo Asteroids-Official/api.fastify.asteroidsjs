@@ -20,14 +20,14 @@ export class SpaceshipService implements IService<SpaceshipDto>{
    * Method that creates a new entity.
    *
    * @param payload defines an object that represents the new entity data.
-   * @returns an object that represents the created spaceshipColor.
+   * @returns an object that represents the created Spaceship.
    */
    async createOne(payload: CreateSpaceshipDto): Promise<SpaceshipDto> {
-    const spaceshipColor = new SpaceshipModel({
+    const spaceship = new SpaceshipModel({
       ...payload,
     })
 
-    const saved = await spaceshipColor.save()
+    const saved = await spaceship.save()
     return saved.toObject()
   }
 
@@ -48,8 +48,8 @@ export class SpaceshipService implements IService<SpaceshipDto>{
       )
     }
 
-    const spaceshipColor = SpaceshipModel.findById(id)
-    return spaceshipColor.toObject()
+    const spaceship = SpaceshipModel.findById(id)
+    return spaceship.toObject()
   }
 
   /**
@@ -58,10 +58,15 @@ export class SpaceshipService implements IService<SpaceshipDto>{
    * @returns an array of objects that represents the found entities.
    */
   async getAll(): Promise<SpaceshipDto[]> {
-    const spaceshipColors = await SpaceshipModel.find()
-    return spaceshipColors.map(item => { item.toObject()})
+    const spaceship = await SpaceshipModel.find()
+    return spaceship.map(item => { item.toObject()})
   }
 
+  /**
+   * Method that delete one from entities.
+   *
+   * @param id represents the entity id.
+   */
   async deleteOne(id: number | string): Promise<void> {
     const exists = await SpaceshipModel.exists({
       _id: `${id}`,
@@ -76,6 +81,13 @@ export class SpaceshipService implements IService<SpaceshipDto>{
     SpaceshipModel.deleteOne({ _id: `${id}`})
   }
 
+  /**
+   * Method that update a entity.
+   *
+   * @param id represents the entity id.
+   * @param payload defines an object that represents the new data for the entity.
+   * @returns an object that represents the updated Spaceship.
+   */
   async updateOne(id: number | string, payload: UpdateSpaceshipDto ): Promise<SpaceshipDto> {
     const exists = await SpaceshipModel.exists({
       _id: `${id}`,
@@ -91,6 +103,12 @@ export class SpaceshipService implements IService<SpaceshipDto>{
     return spaceship
   }
 
+  /**
+   * Method that disable a entity.
+   *
+   * @param id represents the entity id.
+   * @returns an object that represents the disabled Spaceship.
+   */
   async disableOne(id: number | string): Promise<SpaceshipDto> {
     const exists = await SpaceshipModel.exists({
       _id: `${id}`,
@@ -106,6 +124,12 @@ export class SpaceshipService implements IService<SpaceshipDto>{
     return spaceship
   }
 
+  /**
+   * Method that enable a entity.
+   *
+   * @param id represents the entity id.
+   * @returns an object that represents the enabled Spaceship.
+   */
   async enableOne(id: number | string): Promise<SpaceshipDto> {
     const exists = await SpaceshipModel.exists({
       _id: `${id}`,
@@ -117,10 +141,15 @@ export class SpaceshipService implements IService<SpaceshipDto>{
       )
     }
 
-    const spaceshipColor = await SpaceshipModel.findOneAndUpdate({ _id: `${id}`}, {isActive: true})
-    return spaceshipColor
+    const spaceship = await SpaceshipModel.findOneAndUpdate({ _id: `${id}`}, {isActive: true})
+    return spaceship
   }
 
+  /**
+   * Method that get the default entity.
+   *
+   * @returns an object that represents the default Spaceship.
+   */
   async getDefault(): Promise<SpaceshipDto> {
     const spaceship = SpaceshipModel.findOne({isDefault: true})
     return spaceship.toObject()
